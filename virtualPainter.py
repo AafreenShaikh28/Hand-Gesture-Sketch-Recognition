@@ -4,6 +4,56 @@ import time
 import os
 import handTrackingModule as htm 
 
+import pandas as pd
+# from sklearn.linear_model import LogisticRegression
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.metrics import accuracy_score
+
+
+df = pd.read_csv("digit-recognizer/train.csv")
+train = df.iloc[0:int(df.shape[0]*0.7),:]
+test = df.iloc[int(df.shape[0]*0.7):,:]
+
+y_train = train["label"]
+x_train = train.drop("label", axis=1)
+
+
+model = RandomForestClassifier(
+    n_estimators=100
+)
+model.fit(x_train, y_train)
+
+x_test = test.drop("label", axis=1)
+y_test = test["label"]
+y_pred = model.predict(x_test)
+
+accuracy = accuracy_score(y_test, y_pred)
+print("Accuracy:", accuracy)
+
+def canvas_to_mnist(imgCanvas):
+    imgGray = cv2.cvtColor(imgCanvas, cv2.COLOR_BGR2GRAY)
+    imgGray = cv2.bitwise_not(imgGray)
+    _, imgThresh = cv2.threshold(
+        imgGray,
+        20,
+        255,
+        cv2.THRESH_BINARY
+    )
+    # Find bounding box of drawing
+    coords = cv2.findNonZero(imgThresh)
+    if coords is not None:
+        x, y, w, h = cv2.boundingRect(coords)
+        # Crop digit
+        imgCrop = imgThresh[y:y+h, x:x+w]
+        # Resize to 28x28
+        imgResize = cv2.resize(
+            imgCrop,
+            (28, 28),
+            interpolation=cv2.INTER_AREA
+        )
+        return imgResize
+    return None
+
 folder_path = "virtualpainter"
 myList = os.listdir(folder_path)
 myList.pop(0)
@@ -101,6 +151,19 @@ while(True):
     frame[0:720,0:200] = default_header
     # frame = cv2.addWeighted(frame,0.5,imgCanvas,0.5,0)
     cv2.imshow("Camera",frame)
+    key = cv2.waitKey(1) & 0xFF
+
+# -------------------------------------------------------------
+# now we convert the imgCanvas to a 28 x 28 img to feed in the model
+# -------------------------------------------------------------
+    if key == ord('s'):   # Press 's' to save/predict
+        img28 = canvas_to_mnist(imgCanvas)
+        if img28 is not None:
+            img_flat = img28.reshape(1, 784)
+            img_flat = img_flat / 255.0
+            prediction = model.predict(img_flat)
+            print("Predicted digit:", prediction[0])
+
     # cv2.imshow("Canvas",imgCanvas)
     if cv2.waitKey(1) & 0xFF == ord('q'):
         break
