@@ -3,6 +3,7 @@ import numpy as np
 import time
 import os
 import handTrackingModule as htm 
+import DigitRecognitionModule as drm
 
 folder_path = "virtualpainter"
 myList = os.listdir(folder_path)
@@ -90,18 +91,22 @@ while(True):
             index_x_p, index_y_p = 0, 0
 
     imgGray = cv2.cvtColor(imgCanvas, cv2.COLOR_BGR2GRAY)
+    # BW image for model recognition
+    _, imgBW = cv2.threshold(imgGray, 127, 255, cv2.THRESH_BINARY)
+
+    drmObj = drm.DigitRecognition()
+    model_img = drmObj.imgPreprocessing(imgBW = imgBW)
+
     _, imgInv = cv2.threshold(imgGray, 50, 255, cv2.THRESH_BINARY_INV)
     imgInv = cv2.cvtColor(imgInv,cv2.COLOR_GRAY2BGR)
     frame = cv2.bitwise_and(frame,imgInv)
     frame = cv2.bitwise_or(frame,imgCanvas)
-    # 4) check selection
-    # 5) drawing mode? 
-
-    # setting palatte 
+ 
+ 
     frame[0:720,0:200] = default_header
-    # frame = cv2.addWeighted(frame,0.5,imgCanvas,0.5,0)
+
     cv2.imshow("Camera",frame)
-    # cv2.imshow("Canvas",imgCanvas)
+    cv2.imshow("Canvas",model_img)
     if cv2.waitKey(1) & 0xFF == ord('q'):
         break
 cap.release()
