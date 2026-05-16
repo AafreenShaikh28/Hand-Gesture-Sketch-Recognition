@@ -1,0 +1,69 @@
+/* <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Draw&Guess</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="bar1">barr</div>
+    <div class="center">
+        <div class="text">Draw & Guess</div>
+        <div class="button">
+            <a href = "campage.html">
+            <button class=" btn">Start</button>
+            </a>
+        </div>
+    </div>
+    <div class="bar2">barr</div>
+    
+</body>
+</html> */
+body{
+    background-color: #F891A5;
+}
+.bar1,
+.bar2{
+    display: block;
+    background-color: #FDB3C2;
+    height: 41px;
+    width: 100%;
+}
+.bar1{
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+.bar2{
+    position: fixed;
+    bottom: 0;
+    left: 0;
+}
+.center{
+    height: calc(100vh - 120px);
+    display: block;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.text{
+ display: block;
+}
+.btn-img{
+    /* width: 200px; */
+    display: block;
+    transition: transform 0.3s ease;
+}
+
+.btn-img:hover{
+    transform: scale(1.1);
+}
+.logo{
+    transition: transform 0.3s ease;
+}
+
+.logo:hover{
+    transform: rotate(5deg);
+}

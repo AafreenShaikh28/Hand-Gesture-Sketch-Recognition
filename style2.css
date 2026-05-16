@@ -1,0 +1,53 @@
+body{
+    margin: 0;
+    background-color: #F891A5;
+}
+
+.bar1,
+.bar2{
+    background-color: #FDB3C2;
+    height: 41px;
+    width: 100%;
+}
+
+.bar1{
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+
+.bar2{
+    position: fixed;
+    bottom: 0;
+    left: 0;
+}
+
+.center{
+    margin-top: 41px;
+    height: calc(100vh - 82px);
+    display: flex;
+}
+.camera-container{
+    flex: 8;
+    background: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-width: 5px;
+    border-color: white;
+    border-style: dashed;
+    border-radius: 15px;
+}
+
+.pred{
+    flex: 2;
+
+}
+.guess-img{
+    margin-top: 10px;
+    height: 53px;
+    margin-left: 50px;
+}
+/* style2.css */
+.camera-container { position: relative; }
+#drawingCanvas    { position: absolute; top: 0; left: 0; }
