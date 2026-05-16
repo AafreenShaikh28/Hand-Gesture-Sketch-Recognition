@@ -1,17 +1,18 @@
-import cv2
+import tensorflow as tf   # or torch, sklearn — whatever you're using
+import numpy as np
 
 class DigitRecognition:
-    # def __init__(model):
-    #     self.model = model
+    def __init__(self):
+        self.model = tf.keras.models.load_model("mnist_model.h5")
 
-    def imgPreprocessing(self,imgBW):
-        # coords = cv2.findNonZero(imgBW)
-        # if coords is not None:
-        #     x, y, w, h = cv2.boundingRect(coords)
-        #     imgBW = imgBW[y:y+h, x:x+w]
+    def imgPreprocessing(self, imgBW):
         imgResized = cv2.resize(imgBW, (28, 28))
         return imgResized
 
-    # def predictor(self,img):
-    #     prediction = self.model.predict(img)
-    #     return prediction
+    def predict(self, img):
+        img = img.astype("float32") / 255.0
+        img = img.reshape(1, 28, 28, 1)          # batch + channel dims
+        probs = self.model.predict(img)[0]
+        digit = int(np.argmax(probs))
+        confidence = float(probs[digit])
+        return digit, confidence
