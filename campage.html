@@ -13,15 +13,20 @@
     <div class="center">
         <div class="camera-container">
             <video id="video" autoplay></video>
+
             <canvas id="drawingCanvas"></canvas>
         </div>
-        <div class="pred"><img class="guess-img" src="Guesses.png">
+        <div class="pred"><img class="guess-img" src="assets/Guesses.png">
         </div>
 
     </div>
     <div class="bar2"></div>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands/hands.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils/drawing_utils.js"></script>
     <script type="module">
         import { initPainter } from "./virtualpainter.js";
+        import "./prediction.js";
         window.addEventListener("load", initPainter);
     </script>
 </body>

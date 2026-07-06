@@ -1,0 +1,9 @@
+fastapi==0.111.0
+uvicorn[standard]==0.29.0
+opencv-python-headless==4.9.0.80
+numpy==1.26.4
+pydantic==2.7.1
+
+# Uncomment when you add model inference:
+# tensorflow==2.16.1
+# mediapipe==0.10.11   (for finger tracking on the backend if needed)

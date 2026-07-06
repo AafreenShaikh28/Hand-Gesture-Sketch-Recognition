@@ -51,3 +51,21 @@ body{
 /* style2.css */
 .camera-container { position: relative; }
 #drawingCanvas    { position: absolute; top: 0; left: 0; }
+
+.camera-container {
+  position: relative;
+  overflow: hidden; /* clip video if object-fit: cover overflows the rounded/dashed border */
+}
+
+#video,
+#drawingCanvas,
+#landmarkCanvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+#video {
+  object-fit: cover; /* fills the container; your JS already handles cover/contain/fill correctly */
+}
