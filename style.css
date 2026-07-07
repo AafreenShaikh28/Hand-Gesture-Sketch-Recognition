@@ -1,25 +1,3 @@
-/* <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Draw&Guess</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-    <div class="bar1">barr</div>
-    <div class="center">
-        <div class="text">Draw & Guess</div>
-        <div class="button">
-            <a href = "campage.html">
-            <button class=" btn">Start</button>
-            </a>
-        </div>
-    </div>
-    <div class="bar2">barr</div>
-    
-</body>
-</html> */
 body{
     background-color: #F891A5;
 }
@@ -42,7 +20,6 @@ body{
 }
 .center{
     height: calc(100vh - 120px);
-    display: block;
     display: flex;
     justify-content: center;
     align-items: center;

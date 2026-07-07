@@ -51,3 +51,189 @@ body{
 /* style2.css */
 .camera-container { position: relative; }
 #drawingCanvas    { position: absolute; top: 0; left: 0; }
+
+.camera-container {
+  position: relative;
+  overflow: hidden; /* clip video if object-fit: cover overflows the rounded/dashed border */
+}
+
+#video,
+#drawingCanvas,
+#landmarkCanvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+#video {
+  object-fit: cover; /* fills the container; your JS already handles cover/contain/fill correctly */
+}
+/* prediction-panel.css
+   Styles ONLY the prediction guesses panel (#guessResults, injected by
+   prediction.js inside the existing .pred container). Nothing here touches
+   .center / .camera-container / .bar1 / .bar2 or overall page layout.
+
+   Palette stays within the existing pink/white scheme:
+     --pink-deep   #F891A5  (page background / stroke color)
+     --pink-light  #FDB3C2  (top/bottom bars)
+     white + translucency for the glass effect
+
+   Spacing follows an 8pt grid (8 / 12 / 16 / 24px), Apple HIG style.
+*/
+
+:root {
+  --pp-pink-deep: #F891A5;
+  --pp-pink-light: #FDB3C2;
+  --pp-ink: #5A1F35;              /* deep plum-rose, readable on pink/white */
+  --pp-ink-soft: rgba(90, 31, 53, 0.62);
+
+  --pp-panel-bg: rgba(255, 255, 255, 0.30);
+  --pp-panel-border: rgba(255, 255, 255, 0.55);
+
+  --pp-item-bg: rgba(255, 255, 255, 0.46);
+  --pp-item-bg-top: rgba(255, 255, 255, 0.80);
+  --pp-item-border: rgba(255, 255, 255, 0.65);
+
+  --pp-track-bg: rgba(255, 255, 255, 0.40);
+  --pp-fill: linear-gradient(90deg, var(--pp-pink-light), var(--pp-pink-deep));
+  --pp-fill-top: linear-gradient(90deg, #ffffff, var(--pp-pink-light));
+
+  --pp-shadow: 0 8px 28px rgba(178, 55, 90, 0.22);
+  --pp-shadow-hover: 0 12px 36px rgba(178, 55, 90, 0.30);
+
+  --pp-radius-lg: 20px;
+  --pp-radius-sm: 14px;
+
+  --pp-font: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Inter", "Helvetica Neue", sans-serif;
+}
+
+/* Card wrapper the guesses render into. Sits below your existing .guess-img,
+   inside .pred, without changing .pred's own flex sizing. */
+#guessResults {
+  margin-top: 16px;
+  margin-left: 16px;
+  margin-right: 16px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+
+  font-family: var(--pp-font);
+
+  background: var(--pp-panel-bg);
+  border: 1px solid var(--pp-panel-border);
+  border-radius: var(--pp-radius-lg);
+  box-shadow: var(--pp-shadow);
+
+  /* Glassmorphism blur */
+  backdrop-filter: blur(18px) saturate(140%);
+  -webkit-backdrop-filter: blur(18px) saturate(140%);
+
+  transition: box-shadow 0.3s ease;
+}
+
+/* Individual guess row */
+.guess-item {
+  padding: 12px 16px;
+  border-radius: var(--pp-radius-sm);
+  background: var(--pp-item-bg);
+  border: 1px solid var(--pp-item-border);
+
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+
+  transition: transform 0.2s ease, background 0.25s ease, box-shadow 0.25s ease;
+}
+
+.guess-item:hover {
+  transform: translateY(-2px);
+  background: var(--pp-item-bg-top);
+  box-shadow: var(--pp-shadow-hover);
+}
+
+/* Top prediction: brighter glass + the one signature flourish — a soft,
+   slow-pulsing halo. Kept subtle on purpose; nothing else in the panel
+   animates ambiently. */
+.guess-item--top {
+  background: var(--pp-item-bg-top);
+  border-color: rgba(255, 255, 255, 0.9);
+  animation: pp-halo 2.6s ease-in-out infinite;
+}
+
+.guess-item--top:hover {
+  transform: translateY(-2px) scale(1.01);
+}
+
+@keyframes pp-halo {
+  0%, 100% { box-shadow: 0 8px 28px rgba(178, 55, 90, 0.22), 0 0 0 0 rgba(253, 179, 194, 0.55); }
+  50%      { box-shadow: 0 8px 28px rgba(178, 55, 90, 0.22), 0 0 0 6px rgba(253, 179, 194, 0); }
+}
+
+/* Label + confidence row */
+.guess-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+}
+
+.guess-label {
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--pp-ink);
+  letter-spacing: 0.01em;
+}
+
+.guess-item--top .guess-label {
+  font-size: 30px;
+  font-weight: 900;
+}
+
+.guess-confidence {
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--pp-ink-soft);
+  font-variant-numeric: tabular-nums; /* keeps digits aligned as % changes */
+  text-align: right;
+}
+
+.guess-item--top .guess-confidence {
+  color: var(--pp-ink);
+}
+
+/* Progress bar track + animated fill */
+.guess-bar-track {
+  width: 100%;
+  height: 6px;
+  border-radius: 999px;
+  background: var(--pp-track-bg);
+  overflow: hidden;
+}
+
+.guess-item--top .guess-bar-track {
+  height: 8px;
+}
+
+.guess-bar-fill {
+  height: 100%;
+  width: 0%; /* animated up to its target width by prediction.js */
+  border-radius: 999px;
+  background: var(--pp-fill);
+  transition: width 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.guess-item--top .guess-bar-fill {
+  background: var(--pp-fill-top);
+}
+
+/* Respect reduced-motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  .guess-item,
+  .guess-bar-fill {
+    transition: none;
+  }
+  .guess-item--top {
+    animation: none;
+  }
+}
