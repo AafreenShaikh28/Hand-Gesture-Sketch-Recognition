@@ -359,29 +359,29 @@ function drawLandmarksOverlay(landmarks) {
 /**
  * Creates a small on-screen debug panel via JS (no HTML edits needed).
  */
-function createDebugPanel() {
-    if (debugPanelEl) return;
+// function createDebugPanel() {
+//     if (debugPanelEl) return;
 
-    debugPanelEl = document.createElement("div");
-    debugPanelEl.id = "debugPanel";
-    Object.assign(debugPanelEl.style, {
-        position: "absolute",
-        top: "8px",
-        left: "8px",
-        padding: "8px 10px",
-        background: "rgba(0, 0, 0, 0.65)",
-        color: "#0f0",
-        fontFamily: "monospace",
-        fontSize: "12px",
-        lineHeight: "1.4",
-        whiteSpace: "pre",
-        borderRadius: "6px",
-        pointerEvents: "none",
-        zIndex: String((parseInt(getComputedStyle(canvasEl).zIndex, 10) || 0) + 2),
-    });
+//     debugPanelEl = document.createElement("div");
+//     debugPanelEl.id = "debugPanel";
+//     Object.assign(debugPanelEl.style, {
+//         position: "absolute",
+//         top: "8px",
+//         left: "8px",
+//         padding: "8px 10px",
+//         background: "rgba(0, 0, 0, 0.65)",
+//         color: "#0f0",
+//         fontFamily: "monospace",
+//         fontSize: "12px",
+//         lineHeight: "1.4",
+//         whiteSpace: "pre",
+//         borderRadius: "6px",
+//         pointerEvents: "none",
+//         zIndex: String((parseInt(getComputedStyle(canvasEl).zIndex, 10) || 0) + 2),
+//     });
 
-    canvasEl.parentElement.appendChild(debugPanelEl);
-}
+//     canvasEl.parentElement.appendChild(debugPanelEl);
+// }
 
 function updateDebugPanel({ mode, rawX, rawY, canvasX, canvasY, confidence }) {
     if (!debugPanelEl) return;
@@ -693,7 +693,7 @@ export function initPainter() {
     ctx = canvasEl.getContext("2d");
 
     createLandmarkCanvas();
-    createDebugPanel();
+    // createDebugPanel();
     warnIfCanvasMirrored();
 
     videoEl.addEventListener("loadedmetadata", resizeCanvasToVideo);

@@ -1,74 +1,3 @@
-body{
-    margin: 0;
-    background-color: #F891A5;
-}
-
-.bar1,
-.bar2{
-    background-color: #FDB3C2;
-    height: 41px;
-    width: 100%;
-}
-
-.bar1{
-    position: fixed;
-    top: 0;
-    left: 0;
-}
-
-.bar2{
-    position: fixed;
-    bottom: 0;
-    left: 0;
-}
-
-.center{
-    margin-top: 41px;
-    height: calc(100vh - 82px);
-    display: flex;
-}
-.camera-container{
-    flex: 8;
-    background: black;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-width: 5px;
-    border-color: white;
-    border-style: dashed;
-    border-radius: 15px;
-}
-
-.pred{
-    flex: 2;
-
-}
-.guess-img{
-    margin-top: 10px;
-    height: 53px;
-    margin-left: 50px;
-}
-/* style2.css */
-.camera-container { position: relative; }
-#drawingCanvas    { position: absolute; top: 0; left: 0; }
-
-.camera-container {
-  position: relative;
-  overflow: hidden; /* clip video if object-fit: cover overflows the rounded/dashed border */
-}
-
-#video,
-#drawingCanvas,
-#landmarkCanvas {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-}
-
-#video {
-  object-fit: cover; /* fills the container; your JS already handles cover/contain/fill correctly */
-}
 /* prediction-panel.css
    Styles ONLY the prediction guesses panel (#guessResults, injected by
    prediction.js inside the existing .pred container). Nothing here touches
@@ -179,19 +108,19 @@ body{
 }
 
 .guess-label {
-  font-size: 20px;
-  font-weight: 800;
+  font-size: 15px;
+  font-weight: 600;
   color: var(--pp-ink);
   letter-spacing: 0.01em;
 }
 
 .guess-item--top .guess-label {
-  font-size: 30px;
-  font-weight: 900;
+  font-size: 17px;
+  font-weight: 700;
 }
 
 .guess-confidence {
-  font-size: 20px;
+  font-size: 13px;
   font-weight: 600;
   color: var(--pp-ink-soft);
   font-variant-numeric: tabular-nums; /* keeps digits aligned as % changes */

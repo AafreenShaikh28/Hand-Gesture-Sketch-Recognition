@@ -1,13 +1,12 @@
 // prediction.js
 // Handles periodic capture of the drawing canvas and sending it
 // to the FastAPI /predict endpoint, then rendering the guesses.
-
+import { PREDICT_URL } from "./backend/congif.js";
 // ---- State ----
 let guesses = [];       // stores latest prediction results
 let isPredicting = false; // prevents overlapping requests
 let predictionIntervalId = null;
 
-const PREDICT_URL = "http://localhost:8000/predict";
 const INTERVAL_MS = 5000;
 
 /**
@@ -80,6 +79,16 @@ async function sendPrediction(blob) {
  * Updates the existing ".pred" container with the latest guesses.
  * Does NOT alter your HTML structure/CSS file — it only injects
  * a results block dynamically inside the existing container.
+ *
+ * Markup built per guess:
+ *   .guess-item (+ .guess-item--top on the highest-confidence guess)
+ *     .guess-row
+ *       .guess-label
+ *       .guess-confidence
+ *     .guess-bar-track
+ *       .guess-bar-fill  (width animated in on the next frame)
+ *
+ * See prediction-panel.css for all visual styling.
  */
 function renderGuesses(guessList) {
     const container = document.querySelector(".pred");
@@ -103,14 +112,29 @@ function renderGuesses(guessList) {
     }
 
     resultsEl.innerHTML = guessList
-        .map(
-            (g) =>
-                `<div class="guess-item">
-                    <span class="guess-label">${g.label}</span>
-                    <span class="guess-confidence">${(g.confidence * 100).toFixed(1)}%</span>
-                 </div>`
-        )
+        .map((g, index) => {
+            const pct = (g.confidence * 100).toFixed(1);
+            const isTop = index === 0;
+            return `<div class="guess-item${isTop ? " guess-item--top" : ""}">
+                    <div class="guess-row">
+                        <span class="guess-label">${g.label}</span>
+                        <span class="guess-confidence">${pct}%</span>
+                    </div>
+                    <div class="guess-bar-track">
+                        <div class="guess-bar-fill" data-target-width="${pct}"></div>
+                    </div>
+                 </div>`;
+        })
         .join("");
+
+    // Animate bars from 0 -> target width. Setting the width in the same
+    // frame the elements are created would skip the CSS transition, so we
+    // wait one animation frame before applying the real width.
+    requestAnimationFrame(() => {
+        resultsEl.querySelectorAll(".guess-bar-fill").forEach((el) => {
+            el.style.width = `${el.dataset.targetWidth}%`;
+        });
+    });
 }
 
 /**
