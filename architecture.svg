@@ -1,0 +1,90 @@
+<svg width="1400" height="640" viewBox="0 0 1400 640" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <style>
+      .serif { font-family: 'Georgia', 'Times New Roman', serif; }
+      .mono  { font-family: 'Courier New', monospace; }
+    </style>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#1A1A1A" opacity="0.7"/>
+    </marker>
+  </defs>
+
+  <rect width="1400" height="640" fill="#F5F1E8"/>
+
+  <text x="700" y="50" text-anchor="middle" class="serif" font-size="28" fill="#1A1A1A" font-weight="600">Data Flow</text>
+  <line x1="600" y1="66" x2="800" y2="66" stroke="#1A1A1A" stroke-width="1" opacity="0.4"/>
+
+  <!-- Column 1: Browser -->
+  <g>
+    <rect x="60" y="120" width="260" height="120" rx="4" fill="none" stroke="#1A1A1A" stroke-width="1.6"/>
+    <text x="190" y="155" text-anchor="middle" class="serif" font-size="18" fill="#1A1A1A" font-weight="600">HTML5 Canvas</text>
+    <text x="190" y="180" text-anchor="middle" class="mono" font-size="12" fill="#1A1A1A" opacity="0.65">pointer / mouse events</text>
+    <!-- hand-drawn scribble inside representing a sketch -->
+    <path d="M120 205 C 140 190, 160 220, 180 200 C 200 180, 220 215, 260 200"
+          fill="none" stroke="#1A1A1A" stroke-width="2" opacity="0.55" stroke-linecap="round"/>
+  </g>
+
+  <line x1="320" y1="180" x2="390" y2="180" stroke="#1A1A1A" stroke-width="1.6" marker-end="url(#arrow)"/>
+  <text x="355" y="168" text-anchor="middle" class="mono" font-size="11" fill="#1A1A1A" opacity="0.7">toBlob()</text>
+
+  <!-- Column 2: JS capture loop -->
+  <g>
+    <rect x="390" y="120" width="240" height="120" rx="4" fill="none" stroke="#1A1A1A" stroke-width="1.6"/>
+    <text x="510" y="155" text-anchor="middle" class="serif" font-size="18" fill="#1A1A1A" font-weight="600">Capture Loop</text>
+    <text x="510" y="180" text-anchor="middle" class="mono" font-size="12" fill="#1A1A1A" opacity="0.65">PNG Blob</text>
+    <text x="510" y="200" text-anchor="middle" class="mono" font-size="12" fill="#1A1A1A" opacity="0.65">Fetch API</text>
+  </g>
+
+  <line x1="630" y1="180" x2="700" y2="180" stroke="#1A1A1A" stroke-width="1.6" marker-end="url(#arrow)"/>
+  <text x="665" y="168" text-anchor="middle" class="mono" font-size="11" fill="#1A1A1A" opacity="0.7">POST</text>
+
+  <!-- Column 3: FastAPI -->
+  <g>
+    <rect x="700" y="120" width="240" height="120" rx="4" fill="none" stroke="#1A1A1A" stroke-width="1.6"/>
+    <text x="820" y="155" text-anchor="middle" class="serif" font-size="18" fill="#1A1A1A" font-weight="600">FastAPI</text>
+    <text x="820" y="180" text-anchor="middle" class="mono" font-size="12" fill="#1A1A1A" opacity="0.65">/predict endpoint</text>
+    <text x="820" y="200" text-anchor="middle" class="mono" font-size="12" fill="#1A1A1A" opacity="0.65">decode + validate</text>
+  </g>
+
+  <line x1="940" y1="180" x2="1010" y2="180" stroke="#1A1A1A" stroke-width="1.6" marker-end="url(#arrow)"/>
+
+  <!-- Column 4: OpenCV -->
+  <g>
+    <rect x="1010" y="120" width="330" height="120" rx="4" fill="none" stroke="#1A1A1A" stroke-width="1.6"/>
+    <text x="1175" y="155" text-anchor="middle" class="serif" font-size="18" fill="#1A1A1A" font-weight="600">OpenCV Preprocessing</text>
+    <text x="1175" y="180" text-anchor="middle" class="mono" font-size="12" fill="#1A1A1A" opacity="0.65">grayscale &#8594; threshold &#8594; crop</text>
+    <text x="1175" y="200" text-anchor="middle" class="mono" font-size="12" fill="#1A1A1A" opacity="0.65">resize &#8594; normalize</text>
+  </g>
+
+  <!-- curve down to model row -->
+  <path d="M 1175 240 C 1175 290, 700 290, 700 340" fill="none" stroke="#1A1A1A" stroke-width="1.6" marker-end="url(#arrow)"/>
+
+  <!-- Column: TF Model -->
+  <g>
+    <rect x="560" y="340" width="280" height="120" rx="4" fill="none" stroke="#1A1A1A" stroke-width="1.6"/>
+    <text x="700" y="375" text-anchor="middle" class="serif" font-size="18" fill="#1A1A1A" font-weight="600">TensorFlow CNN</text>
+    <text x="700" y="400" text-anchor="middle" class="mono" font-size="12" fill="#1A1A1A" opacity="0.65">3 conv blocks</text>
+    <text x="700" y="420" text-anchor="middle" class="mono" font-size="12" fill="#1A1A1A" opacity="0.65">softmax over classes</text>
+  </g>
+
+  <line x1="560" y1="400" x2="420" y2="400" stroke="#1A1A1A" stroke-width="1.6" marker-end="url(#arrow)"/>
+
+  <!-- Column: Ranked predictions -->
+  <g>
+    <rect x="120" y="340" width="300" height="120" rx="4" fill="none" stroke="#1A1A1A" stroke-width="1.6"/>
+    <text x="270" y="375" text-anchor="middle" class="serif" font-size="18" fill="#1A1A1A" font-weight="600">Prediction Panel</text>
+    <text x="270" y="400" text-anchor="middle" class="mono" font-size="12" fill="#1A1A1A" opacity="0.65">cat &#8212; 0.92</text>
+    <text x="270" y="418" text-anchor="middle" class="mono" font-size="12" fill="#1A1A1A" opacity="0.65">fox &#8212; 0.04</text>
+    <text x="270" y="436" text-anchor="middle" class="mono" font-size="12" fill="#1A1A1A" opacity="0.65">rabbit &#8212; 0.02</text>
+  </g>
+
+  <!-- loop-back arrow, dotted, curving to top -->
+  <path d="M 270 340 C 270 260, 190 260, 190 240" fill="none" stroke="#1A1A1A" stroke-width="1.4" stroke-dasharray="5,5" opacity="0.55" marker-end="url(#arrow)"/>
+  <text x="120" y="290" class="mono" font-size="11" fill="#1A1A1A" opacity="0.6">next capture interval</text>
+
+  <!-- footer rule -->
+  <line x1="60" y1="540" x2="1340" y2="540" stroke="#1A1A1A" stroke-width="1" opacity="0.2"/>
+  <text x="700" y="575" text-anchor="middle" class="serif" font-size="14" fill="#1A1A1A" opacity="0.6" font-style="italic">
+    Every arrow above is a real request boundary — no step is skipped or batched.
+  </text>
+</svg>

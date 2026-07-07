@@ -1,0 +1,57 @@
+<svg width="1600" height="420" viewBox="0 0 1600 420" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <style>
+      .serif { font-family: 'Georgia', 'Times New Roman', serif; }
+      .mono  { font-family: 'Courier New', monospace; }
+    </style>
+  </defs>
+
+  <!-- background -->
+  <rect width="1600" height="420" fill="#F5F1E8"/>
+
+  <!-- faint grid texture, like sketchpad paper -->
+  <g stroke="#1A1A1A" stroke-width="0.5" opacity="0.05">
+    <line x1="0" y1="60" x2="1600" y2="60"/>
+    <line x1="0" y1="120" x2="1600" y2="120"/>
+    <line x1="0" y1="180" x2="1600" y2="180"/>
+    <line x1="0" y1="240" x2="1600" y2="240"/>
+    <line x1="0" y1="300" x2="1600" y2="300"/>
+    <line x1="0" y1="360" x2="1600" y2="360"/>
+  </g>
+
+  <!-- hand-drawn corner motif: a wobbly sketched circle (top-left) -->
+  <path d="M 90 90 C 60 70, 55 130, 85 145 C 115 160, 160 150, 155 110 C 150 70, 105 65, 90 90 Z"
+        fill="none" stroke="#1A1A1A" stroke-width="2.4" opacity="0.75" stroke-linecap="round"/>
+
+  <!-- hand-drawn corner motif: a wobbly sketched star/hand shape (bottom-right) -->
+  <path d="M 1430 300 L 1450 260 L 1460 300 L 1500 285 L 1470 320 L 1505 345 L 1465 340 L 1470 380 L 1445 345 L 1410 360 L 1430 320 Z"
+        fill="none" stroke="#1A1A1A" stroke-width="2.2" opacity="0.6" stroke-linejoin="round"/>
+
+  <!-- small sketched cursor / pen nib icon -->
+  <g transform="translate(1500, 80) rotate(18)">
+    <path d="M0 0 L36 0 L36 10 L10 10 L10 46 L0 46 Z" fill="none" stroke="#1A1A1A" stroke-width="2" opacity="0.5"/>
+    <path d="M14 46 L22 46 L18 60 Z" fill="#1A1A1A" opacity="0.5"/>
+  </g>
+
+  <!-- thin horizontal rule above title -->
+  <line x1="120" y1="150" x2="260" y2="150" stroke="#1A1A1A" stroke-width="1.5" opacity="0.6"/>
+
+  <!-- eyebrow -->
+  <text x="120" y="140" class="mono" font-size="15" letter-spacing="3" fill="#1A1A1A" opacity="0.65">CANVAS &#8594; CNN &#8594; FASTAPI</text>
+
+  <!-- main title -->
+  <text x="118" y="225" class="serif" font-size="64" fill="#1A1A1A" font-weight="600">Hand Gesture</text>
+  <text x="118" y="290" class="serif" font-size="64" fill="#1A1A1A" font-weight="600">Sketch Recognition</text>
+
+  <!-- subtitle -->
+  <text x="120" y="335" class="serif" font-size="19" fill="#1A1A1A" opacity="0.72" font-style="italic">
+    A real-time drawing-to-prediction loop, built on a CNN and served through FastAPI.
+  </text>
+
+  <!-- thin line divider under subtitle -->
+  <line x1="120" y1="355" x2="1480" y2="355" stroke="#1A1A1A" stroke-width="1" opacity="0.18"/>
+
+  <!-- three sketched strokes forming a loose doodle line under the title, like a pen trailing off -->
+  <path d="M 120 380 C 220 400, 300 360, 400 385 C 480 405, 560 370, 640 390"
+        fill="none" stroke="#1A1A1A" stroke-width="1.6" opacity="0.35" stroke-linecap="round"/>
+</svg>
