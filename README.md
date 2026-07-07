@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="banner.svg" width="100%" alt="Hand Gesture Sketch Recognition — banner">
+  <img src="assets_readme/banner.svg" width="100%" alt="Hand Gesture Sketch Recognition — banner">
 </p>
 
 <p align="center">
@@ -99,7 +99,7 @@ The frontend has no knowledge of model internals; the backend has no knowledge o
 ## Architecture
 
 <p align="center">
-  <img src="architecture.svg" width="100%" alt="Architecture diagram — canvas to CNN to prediction panel">
+  <img src="assets_readme/architecture.svg" width="100%" alt="Architecture diagram — canvas to CNN to prediction panel">
 </p>
 
 <details>
